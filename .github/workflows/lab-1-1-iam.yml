@@ -1,0 +1,63 @@
+name: "Lab 1.1 - IAM Setup"
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lab-1.1-iam/"
+      - ".github/workflows/lab-1-1-iam.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "lab-1.1-iam/"
+      - ".github/workflows/lab-1-1-iam.yml"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Terraform action to run"
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+
+jobs:
+  plan_apply:
+    if: |
+      github.event_name != 'workflow_dispatch' ||
+      github.event.inputs.action == 'plan' ||
+      github.event.inputs.action == 'apply'
+    uses: ./.github/workflows/terraform-plan-apply.yml
+    with:
+      working_dir: "lab-1.1-iam"
+      run_apply: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply' && 'true' || 'false' }}
+    secrets:
+      AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+
+  destroy:
+    name: "Terraform Destroy"
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'destroy'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    defaults:
+      run:
+        working-directory: lab-1.1-iam
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+          aws-region: us-east-1
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.15.7"
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
