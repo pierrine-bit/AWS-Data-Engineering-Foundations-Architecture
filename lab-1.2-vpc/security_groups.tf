@@ -1,5 +1,5 @@
 resource "aws_security_group" "public_nat" {
-  name        = "sg-public-nat"
+  name        = "public-nat"
   description = "Security group for public NAT — allows HTTPS outbound from private resources"
   vpc_id      = aws_vpc.main.id
 
@@ -24,7 +24,7 @@ resource "aws_security_group" "public_nat" {
 }
 
 resource "aws_security_group" "private_compute" {
-  name        = "sg-private-compute"
+  name        = "private-compute"
   description = "Security group for private compute resources (EC2, Lambda, Glue)"
   vpc_id      = aws_vpc.main.id
 
@@ -60,7 +60,7 @@ resource "aws_security_group_rule" "private_compute_self" {
 }
 
 resource "aws_security_group" "private_db" {
-  name        = "sg-private-db"
+  name        = "private-db"
   description = "Security group for private databases — accepts traffic from compute layer only"
   vpc_id      = aws_vpc.main.id
 
@@ -81,7 +81,7 @@ resource "aws_security_group" "private_db" {
   }
 
   egress {
-    description = "Allow responses within VPC only — databases must not initiate outbound internet connections"
+    description = "Allow responses within VPC only - databases must not initiate outbound internet connections"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"

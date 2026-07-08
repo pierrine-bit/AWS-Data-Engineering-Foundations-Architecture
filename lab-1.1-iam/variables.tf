@@ -25,7 +25,7 @@ variable "data_engineer_policies" {
   type        = list(string)
   default = [
     "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-    "arn:aws:iam::aws:policy/AWSGlueFullAccess",
+    "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess",
     "arn:aws:iam::aws:policy/AmazonRedshiftFullAccess",
     "arn:aws:iam::aws:policy/AmazonEMRFullAccessPolicy_v2",
     "arn:aws:iam::aws:policy/AmazonKinesisFullAccess",
@@ -72,7 +72,7 @@ variable "analyst_policies" {
   default = [
     "arn:aws:iam::aws:policy/AmazonAthenaFullAccess",
     "arn:aws:iam::aws:policy/AmazonRedshiftReadOnlyAccess",
-    "arn:aws:iam::aws:policy/AmazonQuickSightReadOnlyAccess",
+    "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
     "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
   ]
 }

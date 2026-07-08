@@ -8,13 +8,7 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket       = "cdem01-tfstate"
-    key          = "lab1.2/vpc/terraform.tfstate"
-    region       = "us-east-1"
-    use_lockfile = true
-    encrypt      = true
-  }
+  # Using local state — DCE environment does not permit S3 bucket creation
 }
 
 provider "aws" {
