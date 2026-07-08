@@ -1,15 +1,5 @@
 name: "Lab 1.1 - IAM Setup"
 on:
-  push:
-    branches: [main]
-    paths:
-      - "lab-1.1-iam/"
-      - ".github/workflows/lab-1-1-iam.yml"
-  pull_request:
-    branches: [main]
-    paths:
-      - "lab-1.1-iam/"
-      - ".github/workflows/lab-1-1-iam.yml"
   workflow_dispatch:
     inputs:
       action:

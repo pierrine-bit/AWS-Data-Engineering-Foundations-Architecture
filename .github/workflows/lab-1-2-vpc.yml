@@ -1,15 +1,5 @@
 name: "Lab 1.2 - VPC & Network Setup"
 on:
-  push:
-    branches: [main]
-    paths:
-      - "lab-1.2-vpc/"
-      - ".github/workflows/lab-1.2-vpc.yml"
-  pull_request:
-    branches: [main]
-    paths:
-      - "lab-1.2-vpc/"
-      - ".github/workflows/lab-1.2-vpc.yml"
   workflow_dispatch:
     inputs:
       action:
