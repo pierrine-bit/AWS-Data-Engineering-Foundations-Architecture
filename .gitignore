@@ -1,0 +1,34 @@
+# Terraform downloaded providers and modules — never commit these
+.terraform/
+.terraform.lock.hcl
+
+# State files — use remote backend (S3), never commit local state
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Sensitive variable files
+*.tfvars
+!*.tfvars.example
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files (local developer overrides)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform plan output (may contain secrets)
+*.tfplan
+
+# macOS
+.DS_Store
+
+# Editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
