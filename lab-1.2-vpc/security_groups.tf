@@ -1,6 +1,6 @@
 resource "aws_security_group" "public_nat" {
   name        = "public-nat"
-  description = "Security group for public NAT — allows HTTPS outbound from private resources"
+  description = "Security group for public NAT - allows HTTPS outbound from private resources"
   vpc_id      = aws_vpc.main.id
 
   ingress {
@@ -61,7 +61,7 @@ resource "aws_security_group_rule" "private_compute_self" {
 
 resource "aws_security_group" "private_db" {
   name        = "private-db"
-  description = "Security group for private databases — accepts traffic from compute layer only"
+  description = "Security group for private databases - accepts traffic from compute layer only"
   vpc_id      = aws_vpc.main.id
 
   ingress {

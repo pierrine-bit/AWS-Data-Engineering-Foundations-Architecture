@@ -24,6 +24,10 @@ override.tf.json
 # Terraform plan output (may contain secrets)
 *.tfplan
 
+# Bootstrap artifacts — AWS CLI installer and extracted binaries
+bootstrap/aws/
+bootstrap/awscliv2.zip
+
 # macOS
 .DS_Store
 
