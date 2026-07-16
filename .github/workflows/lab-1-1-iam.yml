@@ -13,8 +13,9 @@ on:
           - destroy
 
 jobs:
-  plan_apply:
-    if: ${{ github.event.inputs.action == 'plan' || github.event.inputs.action == 'apply' }}
+  plan:
+    name: "Terraform Plan"
+    if: ${{ github.event.inputs.action == 'plan' }}
     permissions:
       id-token: write
       contents: read
@@ -22,7 +23,21 @@ jobs:
     uses: ./.github/workflows/terraform-plan-apply.yml
     with:
       working_dir: "lab-1.1-iam"
-      run_apply: ${{ github.event.inputs.action == 'apply' }}
+      run_apply: false
+    secrets:
+      AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+
+  apply:
+    name: "Terraform Apply"
+    if: ${{ github.event.inputs.action == 'apply' }}
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/terraform-plan-apply.yml
+    with:
+      working_dir: "lab-1.1-iam"
+      run_apply: true
     secrets:
       AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
 
