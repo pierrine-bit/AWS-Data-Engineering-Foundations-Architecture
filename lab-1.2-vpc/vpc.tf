@@ -6,10 +6,6 @@ resource "aws_vpc" "main" {
   tags = merge(local.common_tags, {
     Name = "data-platform-vpc"
   })
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "aws_subnet" "public" {
