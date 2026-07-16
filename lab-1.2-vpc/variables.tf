@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region to deploy resources"
   type        = string
-  default     = "us-east-1"
+  default     = "eu-west-1"
 
   validation {
     condition     = contains(["us-east-1", "us-west-2", "eu-west-1"], var.aws_region)
@@ -67,7 +67,7 @@ variable "private_subnet_2_cidr" {
 variable "availability_zones" {
   description = "List of exactly two availability zones — first for public + private-1, second for private-2"
   type        = list(string)
-  default     = ["us-east-1a", "us-east-1b"]
+  default     = ["eu-west-1a", "eu-west-1b"]
 
   validation {
     condition     = length(var.availability_zones) == 2
