@@ -17,7 +17,7 @@ resource "aws_iam_openid_connect_provider" "github" {
 
 resource "aws_iam_role" "github_actions" {
   name        = "GitHubActionsRole"
-  description = "Assumed by GitHub Actions via OIDC — scoped to ${var.github_org}/${var.github_repo}"
+  description = "Assumed by GitHub Actions via OIDC - scoped to ${var.github_org}/${var.github_repo}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
