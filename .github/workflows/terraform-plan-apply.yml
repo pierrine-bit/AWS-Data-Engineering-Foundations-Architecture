@@ -79,7 +79,7 @@ jobs:
               body
             });
       - name: Terraform Apply
-        if: inputs.run_apply == 'true'
+       if: ${{ inputs.run_apply == 'true' }}
         run: terraform apply -auto-approve
       - name: Terraform Output
         if: success()
