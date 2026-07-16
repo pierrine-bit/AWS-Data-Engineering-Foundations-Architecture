@@ -14,7 +14,7 @@ on:
 
 jobs:
   plan_apply:
-    if: github.event.inputs.action != 'destroy'
+    if: ${{ github.event.inputs.action != 'destroy' }}
     permissions:
       id-token: write
       contents: read
@@ -22,13 +22,13 @@ jobs:
     uses: ./.github/workflows/terraform-plan-apply.yml
     with:
       working_dir: "lab-1.1-iam"
-      run_apply: ${{ github.event.inputs.action == 'apply' }}
+     run_apply: ${{ github.event.inputs.action == 'apply' && 'true' || 'false' }}
     secrets:
       AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
 
   destroy:
     name: "Terraform Destroy"
-    if: github.event.inputs.action == 'destroy'
+    if: ${{ github.event.inputs.action == 'destroy' }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
