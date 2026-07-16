@@ -12,10 +12,10 @@ on:
         type: string
         default: "1.15.7"
       run_apply:
-        description: "Set to 'true' to run terraform apply after plan"
+        description: "Set to true to run terraform apply after plan"
         required: false
-        type: string
-        default: "false"
+        type: boolean
+        default: false
     secrets:
       AWS_OIDC_ROLE_ARN:
         required: true
@@ -79,7 +79,7 @@ jobs:
               body
             });
       - name: Terraform Apply
-        if: inputs.run_apply == 'true'
+        if: ${{ inputs.run_apply }}
         run: terraform apply -auto-approve
       - name: Terraform Output
         if: success()
