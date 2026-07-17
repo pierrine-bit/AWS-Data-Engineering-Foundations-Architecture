@@ -145,6 +145,7 @@ resource "aws_iam_role_policy" "github_actions" {
           "ec2:DeleteVpcEndpoints",
           "ec2:DescribeVpcEndpoints",
           "ec2:ModifyVpcEndpoint",
+          "ec2:DescribeNetworkInterfaces",
           "ec2:DescribeAvailabilityZones",
           "ec2:CreateTags",
           "ec2:DeleteTags",
